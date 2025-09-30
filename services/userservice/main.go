@@ -1,12 +1,19 @@
-module 8-domain/8-project
+package main
 
-go 1.21
+import (
+    "fmt"
+    "log"
+    "net/http"
+    "time"
+)
 
-// Thêm các thư viện cần thiết ở đây, ví dụ:
-// require (
-// 	 github.com/confluentinc/confluent-kafka-go/v2 v2.2.0
-// 	 go.temporal.io/sdk v1.25.0
-// 	 google.golang.org/grpc v1.58.2
-// 	 google.golang.org/protobuf v1.31.0
-// )
+func main() {
+    // Đây chỉ là một service placeholder đơn giản
+    fmt.Println("Starting UserService...")
 
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintf(w, "Hello from UserService at %s", time.Now())
+    })
+
+    log.Fatal(http.ListenAndServe(":8081", nil))
+}
