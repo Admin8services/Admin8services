@@ -1,5 +1,4 @@
-module your-domain/your-project
-
+module 8-domain/8-project
 go 1.21
 
 // Thêm các thư viện cần thiết ở đây, ví dụ:
@@ -9,3 +8,4 @@ go 1.21
 // 	 google.golang.org/grpc v1.58.2
 // 	 google.golang.org/protobuf v1.31.0
 // )
+
