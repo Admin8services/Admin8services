@@ -1,0 +1,38 @@
+# Tự động hóa thiết lập môi trường phát triển trên Gitpod
+
+ports:
+  # Cổng cho API Gateway (sẽ được tạo sau)
+  - port: 8080
+    onOpen: open-preview
+  # Cổng cho Temporal Web UI
+  - port: 8233
+    onOpen: open-browser
+  # Cổng cho Prometheus (monitoring)
+  - port: 9090
+    onOpen: ignore
+  # Cổng cho Grafana (monitoring)
+  - port: 3000
+    onOpen: ignore
+
+tasks:
+  - name: Cài đặt & Khởi động Hệ thống
+    # init: Chạy một lần khi workspace được tạo lần đầu hoặc sau khi file .gitpod.Dockerfile thay đổi
+    init: |
+      echo "--- Cài đặt các công cụ Go và Protobuf ---"
+      go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+      go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+      echo "--- Tải các dependencies Go ---"
+      go mod download
+      echo "--- Kéo các Docker images cần thiết ---"
+      docker-compose pull
+    # command: Chạy mỗi khi workspace khởi động
+    command: |
+      echo "--- Khởi động các dịch vụ nền (Kafka, Temporal...) ---"
+      docker-compose up -d
+      echo "--- Môi trường đã sẵn sàng! ---"
+      echo "Bạn có thể truy cập Temporal UI tại cổng 8233."
+      gp sync-done # Báo cho Gitpod biết task đã hoàn tất
+
+# Chỉ định Dockerfile để xây dựng môi trường
+image:
+  file: .gitpod.Dockerfile

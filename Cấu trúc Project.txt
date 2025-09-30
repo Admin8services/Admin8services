@@ -1,0 +1,14 @@
+Project Event-Driven với Kafka & TemporalĐây là project mẫu được cấu hình sẵn để phát triển trên Gitpod.Cấu trúc thư mục.
+├── .gitpod.Dockerfile      # Định nghĩa môi trường Gitpod (Go, protoc)
+├── .gitpod.yml             # File cấu hình chính của Gitpod
+├── docker-compose.yml      # Chạy Kafka, Temporal và các service ứng dụng
+├── go.mod
+├── go.sum
+├── protos/                 # Nơi chứa các file .proto cho gRPC và Kafka events
+│   └── user
+│       └── user.proto
+└── services/               # Monorepo chứa các microservices
+    └── userservice/
+        ├── main.go
+        └── Dockerfile
+Bắt đầu với GitpodCommit tất cả các file này vào Git repository của bạn (GitHub, GitLab, Bitbucket).Mở Repository trong Gitpod bằng cách truy cập vào URL có dạng:gitpod.io/#https://github.com/your-username/your-repoGitpod sẽ tự động đọc file .gitpod.yml, xây dựng môi trường từ .gitpod.Dockerfile và chạy docker-compose up.Sau vài phút, toàn bộ hệ thống (Kafka, Temporal) sẽ khởi động. Một cửa sổ trình duyệt sẽ mở ra, trỏ đến Temporal UI.Workspace của bạn đã sẵn sàng! Mở một terminal mới và bắt đầu phát triển các service trong thư mục /services.Chúc bạn có một trải nghiệm lập trình hiệu quả!
